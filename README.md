@@ -12,9 +12,9 @@ ie. within the [Piattaforma Digitale Nazionale Dati (PDND) - previously DAF](htt
 CKAN-IT provides everything you need to run CKAN plus a set of extensions for supporting Italian open data in a set of Docker images.
 If you are interested in an open data catalogue up and running in minutes, see [italia/ckan-it](https://github.com/italia/ckan-it).
 
-## Resources: organizations and harvesting sources
+## Entities: organizations and harvesting sources
 
-A resource is composed by two entities: an organization and a harvesting source. Both are described by a json file compliant with the schemas provided.
+There are two entities: an organization and a harvesting source. Both are described by a json file compliant with the schemas provided.
 In `orgs/` folder there are all organizations. In `sources/` folder, all harvesting sources.
 
 Before importing or just after exporting you should check compliance with schemas in `schemas/` folder using two provided scripts.
@@ -55,6 +55,14 @@ Harvesting sources:
   * "Catalogo federato " followed by the name of organization (also the acronym if present)
   * "Geoportale " followed by the name of organization (also the acronym if present)
 * if source is not harvestable by CKAN-IT, use `#` for the url field
+
+The following different types of harvesters are currently supported:
+* **CKAN**: this type of harvesting enables the metadata exchange between two instances of standard CKAN with no specific externsions enabled. It uses the APIs version 3 offered by CKAN and it can be used when both instances do not comply with any specific national standards;
+* **CSW server (multilang)**: this type of harvesting imports geospatial metadata made available through the CSW protocol. Multilang manages multilingual fields for datasets, groups, tags and organizations
+* **Generic DCAT RDF Harvester**: this type of harvestings allows you to collect metadata that are described using the RDF (Resource Description Framework) Web standard, following the [DCAT specifications](https://www.w3.org/TR/2018/WD-vocab-dcat-2-20180508/). In particular,  it is used in order to harvest data sources that are compliant with [DCAT-AP_IT](https://docs.italia.it/italia/daf/linee-guida-cataloghi-dati-dcat-ap-it/it/bozza/dcat-ap_it.html), an extension we built upon the CKAN's DCAT RDF harvester; 
+* **DCAT JSON Harvester**: this type of harvesting is used when data.json metadata files are provided by data sources. The data.json is an API endpoint for describing open data catalogs by leveraging the [U.S. Project Open Data metadata schema standards](https://project-open-data.cio.gov/v1.1/schema/). Usually data management systems like Socrata and DKAN offer such an endpoint. Therefore, this type of harvest can be used in all those cases in which Socrata or DKAN platforms are used at data sources (e.g., ACI DKAN catalog of open datasets). This type of harvesting comes with the earlier mentioned CKAN's DCAT RDF harvester;
+* **CKAN Harvester for DCATAPIT**: this type of harvesting enables the metadata exchange between two instances of standard CKAN, dealing with some requirements of the DCAT-AP_IT specifications (e.g., mapping on the 13 data themes, on licences controlled vocabulary). This harvesting should be used when a DCAT-AP_IT compliant catalog wants to harvest a CKAN catalog of a data source that is not compliant with DCAT-AP_IT.
+* **DCAT-AP_IT CSW Harvester**: this type of harvesting is used to collect metadata made available through the OGC CSW protocol. It is built upon the CKAN's spatial extension, and inherits all of its functionalities. This harvester allows you to harvest dcat-ap-it dataset fields from the ISO metadata. It is useful wben dealing with harvesting of open geospatial data.
 
 ## How to import resources in CKAN-IT
 
