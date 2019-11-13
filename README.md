@@ -8,7 +8,6 @@ This repository aims to collect and share an updated list of Italian public open
 
 It is also the official repository of harvesting sources for [CKAN-IT](https://github.com/italia/ckan-it) when configured as open data harvester,
 ie. within the [Piattaforma Digitale Nazionale Dati (PDND) - previously DAF](https://pdnd.italia.it/).
-
 CKAN-IT provides everything you need to run CKAN plus a set of extensions for supporting Italian open data in a set of Docker images.
 If you are interested in an open data catalogue up and running in minutes, see [italia/ckan-it](https://github.com/italia/ckan-it).
 
@@ -26,12 +25,12 @@ You must have Python3 and the [jsonschema module](https://pypi.org/project/jsons
 If you want to run them in a virtual environment, a Pipfile is provided to use with [pipenv](https://pipenv.kennethreitz.org/en/latest/).
 If you have pipenv, just run `pipenv shell` and then `pipenv install` before launch the validation scripts.
 
-You can combine all resources from `orgs/` and `sources/` folders in single nested json files using `export_resources.py` script that creates two files in `resources/` folder:
+You can combine all entities from `orgs/` and `sources/` folders in single json files using `export_all.py` script that creates two files in `dist/` folder:
 
-* `resources.json` with a list of organizations and sources per organization;
-* `nested_resources.json` with a deeper nested object (see [#6](https://github.com/italia/public-opendata-sources/issues/6) for details).
+* `index.json` with a list of organizations and sources per organization;
+* `nested/index.json` with a deeper nested object (see [#6](https://github.com/italia/public-opendata-sources/issues/6) for details).
 
-To validate them you can use the provided `validate_resources.sh` script.
+To validate them you can use the provided `validate_all.sh` script.
 
 ### Naming convention
 
@@ -70,7 +69,7 @@ The following different types of harvesters are currently supported.
 
 * **DCAT-AP_IT CSW Harvester** (`DCAT_AP-IT CSW Harvester`): this type of harvesting is used to collect metadata made available through the OGC CSW protocol. It is built upon the CKAN's spatial extension, and inherits all of its functionalities. This harvester allows you to harvest DCAT-AP_IT dataset fields from the ISO metadata. It is useful wben dealing with harvesting of open geospatial data.
 
-## How to import resources in CKAN-IT
+## How to import orgs and sources in CKAN-IT
 
 Install, setup and run CKAN from [the official repository](https://github.com/italia/ckan-it).
 
@@ -85,7 +84,7 @@ Otherwise you can manually use the `import_all.sh` script on a running instance 
 
 Now follow [these steps](https://github.com/italia/ckan-it#ckan-it-harvesting-optional) to run CKAN-IT harvesting process.
 
-## How to export your resources
+## How to export your orgs and sources
 
 If you are running a CKAN-IT instance with many harvesting sources defined (ie. using the web interface), you can export them all using `export_orgs.py` and `export_sources.py` scripts. You must have Python3 installed or use pipenv with provided Pipfile.
 
